@@ -1,3 +1,32 @@
+<div class="row mb-3">
+  <div class="col-md-4">
+    <input
+      class="form-control"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by car name..."
+    />
+  </div>
+  <div class="col-md-4">
+    <select class="form-select" [(ngModel)]="sortField">
+      <option value="name">Sort by Name</option>
+      <option value="origin">Sort by MPG</option>
+      <option value="cylinders">Sort by Cylinders</option>
+      <option value="displacements">Sort by Displacements</option>
+      <option value="horsepower">Sort by Horsepower</option>
+      <option value="weight">Sort by weight</option>
+      <option value="acceleration">Sort by Acceleration</option>
+      <option value="model_year">Sort by Model Year</option>
+      <option value="origin">Sort by Origin</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <select class="form-select" [(ngModel)]="sortOrder">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </div>
+</div>
+
 <table
   class="table table-striped table-bordered table-hover mt-4 align-middle text-center rounded"
 >
@@ -16,7 +45,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let automobile of automobiles">
+    <tr *ngFor="let automobile of filterdAutomobiles()">
       <td>{{ automobile.name }}</td>
       <td>{{ automobile.mpg }}</td>
       <td>{{ automobile.cylinders }}</td>
