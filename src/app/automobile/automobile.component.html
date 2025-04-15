@@ -1,1 +1,34 @@
-<table></table>
+<table
+  class="table table-striped table-bordered table-hover mt-4 align-middle text-center rounded"
+>
+  <thead>
+    <tr>
+      <th class="bg-info text-white" style="width: 20%">Name</th>
+      <th class="bg-info text-white" style="width: 5%">MPG</th>
+      <th class="bg-info text-white" style="width: 10%">Cylinders</th>
+      <th class="bg-info text-white" style="width: 10%">Displacement</th>
+      <th class="bg-info text-white" style="width: 10%">Horsepower</th>
+      <th class="bg-info text-white" style="width: 10%">Weight</th>
+      <th class="bg-info text-white" style="width: 10%">Acceleration</th>
+      <th class="bg-info text-white" style="width: 10%">Model Year</th>
+      <th class="bg-info text-white" style="width: 5%">Origin</th>
+      <th class="bg-info text-white" style="width: 15%">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let automobile of automobiles">
+      <td>{{ automobile.name }}</td>
+      <td>{{ automobile.mpg }}</td>
+      <td>{{ automobile.cylinders }}</td>
+      <td>{{ automobile.displacement }}</td>
+      <td>{{ automobile.horsepower }}</td>
+      <td>{{ automobile.weight }}</td>
+      <td>{{ automobile.acceleration }}</td>
+      <td>{{ automobile.model_year }}</td>
+      <td>{{ automobile.origin | uppercase }}</td>
+      <td>
+        <button class="btn btn-outline-danger btn-sm w-100">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
