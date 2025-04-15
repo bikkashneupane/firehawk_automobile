@@ -32,6 +32,9 @@ export class AutomobileComponent implements OnInit {
     { key: 'origin', label: 'Origin', type: 'text' },
   ];
 
+  currentPage = 1;
+  itemsPerPage = 15;
+
   constructor(private automobileService: AutomobileService) {}
 
   // Initial Component Load
@@ -198,5 +201,35 @@ export class AutomobileComponent implements OnInit {
       console.log('Error Deleting Automobile: ', error);
       alert('Error Deleting Automobile');
     }
+  }
+
+  // pagination
+  get totalPages(): number {
+    return Math.ceil(this.filterdAutomobiles().length / this.itemsPerPage);
+  }
+
+  filteredAutomobilesWithPagination(): Automobile[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filterdAutomobiles().slice(start, end);
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  getPaginationInfo(): string {
+    const totalItems = this.filterdAutomobiles().length;
+    const startItem = (this.currentPage - 1) * this.itemsPerPage + 1;
+    const endItem = Math.min(this.currentPage * this.itemsPerPage, totalItems);
+    return `Showing ${startItem}-${endItem} of ${totalItems}`;
   }
 }

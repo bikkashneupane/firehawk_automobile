@@ -5,7 +5,7 @@ Check out the project live here: [https://firehawkautomobile.web.app](https://fi
 # Automobile Data Management App
 
 A simple automobile data management dashboard built using Angular 19, Firebase Firestore, and Bootstrap.
-This application allows users to search, sort, download, and manage automobile data efficiently.
+This application allows users to search, sort, paginate, download, and manage automobile data efficiently.
 
 ---
 
@@ -14,6 +14,7 @@ This application allows users to search, sort, download, and manage automobile d
 - View automobile dataset from Kaggle
 - Search automobiles by name
 - Sort automobiles by any column (ascending/descending)
+- Pagination support for large datasets
 - Add new automobiles to Firestore database
 - Delete automobiles from Firestore
 - Download visible data as a CSV file
@@ -34,7 +35,7 @@ This application allows users to search, sort, download, and manage automobile d
 
 1. Clone this repo.
 2. Run `npm install`.
-3. Set up Firebase config in your `environment.ts`, rename the environmet.sample.ts to environment.ts and update the content as listed.
+3. Rename `environment.sample.ts` to `environment.ts` and update it with your Firebase config.
 4. Run `ng serve`.
 
 ---
@@ -47,6 +48,7 @@ _(Not implemented due to task scope, but recommended in production)_:
 - Role-based access control
 - Edit automobile functionality
 - Better error handling + UI notifications
+- Mobile-friendly (currently not focused)
 - Unit/Integration Testing
 
 ---
@@ -67,6 +69,7 @@ This is a guide to help you use the Automobile Data Dashboard, an Angular + Fire
 
 - On initial load, the full dataset is loaded from Firebase Firestore.
 - Data is presented in a table format with columns such as Name, MPG, Cylinders, Horsepower, etc.
+- Pagination allows easy navigation through large datasets.
 
 ## 2. Search and Sort
 
@@ -88,15 +91,20 @@ This is a guide to help you use the Automobile Data Dashboard, an Angular + Fire
 - Click "Save Automobile" to store it in Firebase Firestore.
 - On success, the table will automatically update.
 
-## 4. Remove a Automobile
+## 4. Remove an Automobile
 
-- Click the “Delete” button in the "Actions" column for a automobile.
+- Click the “Delete” button in the "Actions" column for an automobile.
 - A confirmation will appear. On confirmation, the automobile will be removed from Firestore and UI.
 
 ## 5. Download as CSV
 
-- Click the “Download CSV” button to download current filtered + sorted automobile list.
-- Only rows that match the search and sort are downloaded.
+- Click the “Download CSV” button to download the current filtered + sorted automobile list.
+- Only rows that match the search and sort are downloaded — not just the visible page.
+
+## 6. Pagination
+
+- Pagination is used for better performance and UX on large datasets (300+ records).
+- Navigate using previous/next buttons at the bottom of the table.
 
 ---
 
@@ -104,15 +112,4 @@ This is a guide to help you use the Automobile Data Dashboard, an Angular + Fire
 
 - Edit functionality is not available.
 - No user login or access control (intentionally skipped per task scope).
-
-### Checklist
-
-1. bootstrap, folder structure
-2. firebase, firestore added and hosted
-3. csv file is parsed with papaparse and firestore is loaded with this data
-4. automobile service added , basic UI displaying all the data
-5. Search/ Sort Feature
-6. filesaver package to save the csv file(download)
-7. Add new automobile to 'automobile' collection in firestone
-8. Delete Feature (Additional) added
-9. Header/ Minor UI change
+- Not Mobile-friendly
