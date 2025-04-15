@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { CsvimportService } from './services/csvimport/csvimport.service';
 import { collection, Firestore, getDocs } from '@angular/fire/firestore';
 import { AutomobileComponent } from './automobile/automobile.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AutomobileComponent],
+  imports: [RouterOutlet, AutomobileComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

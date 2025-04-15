@@ -184,6 +184,7 @@ export class AutomobileComponent implements OnInit {
     });
   }
 
+  // delete
   async deleteAutomobile(automobileId: string): Promise<void> {
     try {
       const confirmation = confirm('Are you sure, you want to delete?');
