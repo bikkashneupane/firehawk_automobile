@@ -1,9 +1,73 @@
 <div class="row mb-3 mt-5">
-  <div class="mb-3 d-flex justify-content-end">
-    <button class="btn btn-success fw-bold" (click)="downloadCSVFile()">
-      Download Current Data
-    </button>
+  <div class="mb-3 d-flex justify-content-between align-items-center gap-1">
+    <h5 class="text-secondary">
+      Our Current Automobile Dataset (source: Kaggle)
+    </h5>
+
+    <div class="d-flex justify-content-end gap-1">
+      <button
+        class="btn btn-outline-primary fw-bold"
+        (click)="toggleAddAutomobile()"
+      >
+        Add New Car
+      </button>
+
+      <button
+        class="btn btn-outline-success fw-bold"
+        (click)="downloadCSVFile()"
+      >
+        Download Current View
+      </button>
+    </div>
   </div>
+
+  <div *ngIf="showAddAutomobileForm" class="card p-3 mb-4">
+    <form (ngSubmit)="addAutomobile()" #carForm="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-6 mb-3" *ngFor="let field of automobileFields">
+          <label [for]="field.key" class="form-label">{{ field.key }}</label>
+          <input
+            [type]="field.type"
+            [name]="field.key"
+            [id]="field.key"
+            required
+            class="form-control"
+            [(ngModel)]="newAutomobile[field.key]"
+            #fieldRef="ngModel"
+            [ngClass]="{
+              'border border-danger':fieldRef.invalid && fieldRef.touched,
+              'border border-success':fieldRef.valid && fieldRef.touched,
+            }"
+          />
+          <div
+            *ngIf="fieldRef.invalid && fieldRef.touched"
+            class="text-danger small"
+          >
+            {{ field.key | titlecase }} is required.
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-md-6 d-flex gap-1">
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="carForm.invalid"
+          >
+            Add Car
+          </button>
+          <button
+            type="button"
+            (click)="toggleAddAutomobile()"
+            class="btn btn-danger w-100"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <div class="col-md-4">
     <input
       class="form-control"
@@ -70,7 +134,12 @@
       <td>{{ automobile.model_year }}</td>
       <td>{{ automobile.origin | uppercase }}</td>
       <td>
-        <button class="btn btn-outline-danger btn-sm w-100">Remove</button>
+        <button
+          class="btn btn-outline-danger btn-sm w-100"
+          (click)="deleteAutomobile(automobile.id!)"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>

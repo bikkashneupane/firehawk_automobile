@@ -6,3 +6,5 @@
 4. automobile service added , basic UI displaying all the data
 5. Search/ Sort Feature
 6. filesaver package to save the csv file(download)
+7. Add new automobile to 'automobile' collection in firestone
+8. Delete Feature (Additional) added
