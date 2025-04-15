@@ -3,11 +3,16 @@
     <input
       class="form-control"
       [(ngModel)]="searchTerm"
+      (ngModelChange)="onFilterChange()"
       placeholder="Search by car name..."
     />
   </div>
   <div class="col-md-4">
-    <select class="form-select" [(ngModel)]="sortField">
+    <select
+      class="form-select"
+      [(ngModel)]="sortField"
+      (ngModelChange)="onFilterChange()"
+    >
       <option value="name">Sort by Name</option>
       <option value="origin">Sort by MPG</option>
       <option value="cylinders">Sort by Cylinders</option>
@@ -20,7 +25,11 @@
     </select>
   </div>
   <div class="col-md-4">
-    <select class="form-select" [(ngModel)]="sortOrder">
+    <select
+      class="form-select"
+      [(ngModel)]="sortOrder"
+      (ngModelChange)="onFilterChange()"
+    >
       <option value="asc">Ascending</option>
       <option value="desc">Descending</option>
     </select>

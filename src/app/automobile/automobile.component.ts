@@ -20,6 +20,7 @@ export class AutomobileComponent implements OnInit {
 
   // Initial Component Load
   ngOnInit(): void {
+    this.loadFiltersFromLocalStorage();
     this.automobileService.getAutomobiles().subscribe((data) => {
       this.automobiles = data;
     });
@@ -40,5 +41,34 @@ export class AutomobileComponent implements OnInit {
       if (this.sortOrder === 'asc') return valA > valB ? 1 : -1;
       return valA < valB ? 1 : -1;
     });
+  }
+
+  // save filters at local storage
+  saveFiltersToLocalStorage(): void {
+    const filters = {
+      searchTerm: this.searchTerm || '',
+      sortField: this.sortField || 'name',
+      sortOrder: this.sortOrder || 'asc',
+    };
+
+    localStorage.setItem('automobileFilters', JSON.stringify(filters));
+  }
+
+  // load filters from local storage
+  loadFiltersFromLocalStorage(): void {
+    const savedFilters = localStorage.getItem('automobileFilters');
+
+    if (savedFilters) {
+      const filters = JSON.parse(savedFilters);
+
+      this.searchTerm = filters.searchTerm || '';
+      this.sortField = filters.sortField || 'name';
+      this.sortOrder = filters.sortOrder || 'asc';
+    }
+  }
+
+  // filter change handler
+  onFilterChange(): void {
+    this.saveFiltersToLocalStorage();
   }
 }
