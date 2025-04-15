@@ -1,14 +1,6 @@
-### Checklist
+## 🔗 Live Demo
 
-1. bootstrap, folder structure
-2. firebase, firestore added and hosted
-3. csv file is parsed with papaparse and firestore is loaded with this data
-4. automobile service added , basic UI displaying all the data
-5. Search/ Sort Feature
-6. filesaver package to save the csv file(download)
-7. Add new automobile to 'automobile' collection in firestone
-8. Delete Feature (Additional) added
-9. Header/ Minor UI change
+Check out the project live here: [https://firehawkautomobile.web.app](https://firehawkautomobile.web.app)
 
 # Automobile Data Management App
 
@@ -112,3 +104,15 @@ This is a guide to help you use the Automobile Data Dashboard, an Angular + Fire
 
 - Edit functionality is not available.
 - No user login or access control (intentionally skipped per task scope).
+
+### Checklist
+
+1. bootstrap, folder structure
+2. firebase, firestore added and hosted
+3. csv file is parsed with papaparse and firestore is loaded with this data
+4. automobile service added , basic UI displaying all the data
+5. Search/ Sort Feature
+6. filesaver package to save the csv file(download)
+7. Add new automobile to 'automobile' collection in firestone
+8. Delete Feature (Additional) added
+9. Header/ Minor UI change
