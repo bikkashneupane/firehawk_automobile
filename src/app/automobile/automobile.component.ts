@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutomobileService } from '../services/automobile/automobile.service';
 import { Automobile } from '../model/automobile.model';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-automobile',
@@ -70,5 +71,47 @@ export class AutomobileComponent implements OnInit {
   // filter change handler
   onFilterChange(): void {
     this.saveFiltersToLocalStorage();
+  }
+
+  // download the current UI data in CSV format
+  downloadCSVFile(): void {
+    const filteredData = this.filterdAutomobiles();
+    if (!filteredData.length) return;
+
+    // hard coading to exclude id field
+    const fields = [
+      'name',
+      'mpg',
+      'cylinders',
+      'displacement',
+      'horsepower',
+      'weight',
+      'acceleration',
+      'model_year',
+      'origin',
+    ];
+
+    // csv header
+    const csvRows: string[] = [fields.join(',')];
+
+    // format each row
+    for (const automobile of filteredData) {
+      const row = fields
+        .map((field) => {
+          let value = (automobile as any)[field];
+
+          // just incase there are empty fieds
+          if (value === undefined || value === null) value = '';
+          return value;
+        })
+        .join(',');
+      csvRows.push(row);
+    }
+
+    // combining into csv string with line breaks
+    const csvContents = csvRows.join('\r\n');
+
+    const blob = new Blob([csvContents], { type: 'text/csv;charset=utf-8' });
+    saveAs(blob, 'Automobile_Data.csv');
   }
 }
